@@ -9,7 +9,7 @@
 ### Celestia is pioneering a new paradigm in blockchain design. A minimal, modular consensus layer for rollups.
 
 
-#Hardware requirements
+# Hardware requirements
 
  ### The following hardware minimum requirements are recommended for running the validator node:
 
@@ -28,11 +28,11 @@
 
 ### Post installation
 
-    source $HOME/.bash_profile
+      source $HOME/.bash_profile
 
 + (Check the status of your node)
 
-    celestia-appd status 2>&1 | jq .SyncInfo
+      celestia-appd status 2>&1 | jq .SyncInfo
 
 ### open ports and active the firewall
 
@@ -47,15 +47,15 @@
 
  + (Please save all keys on your notepad)  
  
-     celestia-appd keys add $WALLET
+       celestia-appd keys add $WALLET
      
  + To recover your old wallet use this command
 
-     celestia-appd keys add $WALLET --recover
+       celestia-appd keys add $WALLET --recover
      
  + show keys
 
-     celestia-appd keys list
+       celestia-appd keys list
      
      
  ### Add wallet and valoper address and load variables into the system
@@ -146,7 +146,17 @@
       --chain-id=$CELESTIA_CHAIN_ID \
       --from=$wallet
       
-      
+ 
+ # Delete your node
+ 
+      sudo systemctl stop celestia-appd
+      sudo systemctl disable celestia-appd
+      sudo rm /etc/systemd/system/celestia* -rf
+      sudo rm $(which celestia-appd) -rf
+      sudo rm $HOME/.celestia-app* -rf
+      sudo rm $HOME/celestia -rf
+      sed -i '/CELESTIA_/d' ~/.bash_profile
+ 
   Done
   
   [buy me cup of cafee](https://www.paypal.com/paypalme/AbdelAkridi?country.x=NL&locale.x=en_US)
